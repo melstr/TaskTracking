@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: 'jdbc:postgresql://localhost:5433/task_tracking'
+    username: postgres
+    password: password
+  jpa:
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: update
+  jackson:
+    time-zone: UTC
+server:
+#  error:
+#    include-message: always
+#    include-exception: true
+#    include-binding-errors: always
+#    include-stacktrace: never
+  port: '8080'
+  servlet:
+    context-path: /api/v1.0
+logging:
+  level:
+    web: debug
