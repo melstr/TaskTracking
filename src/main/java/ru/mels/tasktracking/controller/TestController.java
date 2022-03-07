@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.mels.tasktracking.exception.EmployeeNotFoundException;
 
 /**
  * @author Meleshkin Alexandr
@@ -16,6 +17,7 @@ public class TestController {
 
     @GetMapping
     String getHello(){
-        return "Hello!";
+        throw new EmployeeNotFoundException(20);
+//        return "Hello!";
     }
 }

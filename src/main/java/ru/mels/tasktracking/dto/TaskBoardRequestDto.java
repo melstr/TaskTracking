@@ -7,7 +7,6 @@ package ru.mels.tasktracking.dto;
 public class TaskBoardRequestDto {
     Integer id;
     Integer title;
-    Integer projectId;
 
     public Integer getTitle() {
         return title;
@@ -17,11 +16,4 @@ public class TaskBoardRequestDto {
         this.title = title;
     }
 
-    public Integer getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
-    }
 }

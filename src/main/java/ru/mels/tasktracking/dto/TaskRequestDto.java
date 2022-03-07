@@ -11,10 +11,7 @@ public class TaskRequestDto {
     String description;
     TaskStatus status;
     String title;
-    Integer releaseId;
-    Integer taskBoardId;
-    Integer assigneeId;
-    Integer reporterId;
+
 
     public String getDescription() {
         return description;
@@ -40,35 +37,4 @@ public class TaskRequestDto {
         this.title = title;
     }
 
-    public Integer getReleaseId() {
-        return releaseId;
-    }
-
-    public void setReleaseId(Integer releaseId) {
-        this.releaseId = releaseId;
-    }
-
-    public Integer getTaskBoardId() {
-        return taskBoardId;
-    }
-
-    public void setTaskBoardId(Integer taskBoardId) {
-        this.taskBoardId = taskBoardId;
-    }
-
-    public Integer getAssigneeId() {
-        return assigneeId;
-    }
-
-    public void setAssigneeId(Integer assigneeId) {
-        this.assigneeId = assigneeId;
-    }
-
-    public Integer getReporterId() {
-        return reporterId;
-    }
-
-    public void setReporterId(Integer reporterId) {
-        this.reporterId = reporterId;
-    }
 }
