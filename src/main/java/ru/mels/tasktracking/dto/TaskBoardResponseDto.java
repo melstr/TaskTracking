@@ -6,7 +6,7 @@ package ru.mels.tasktracking.dto;
  */
 public class TaskBoardResponseDto {
     Integer id;
-    Integer title;
+    String title;
     Integer projectId;
 
     public Integer getId() {
@@ -17,11 +17,11 @@ public class TaskBoardResponseDto {
         this.id = id;
     }
 
-    public Integer getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(Integer title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
