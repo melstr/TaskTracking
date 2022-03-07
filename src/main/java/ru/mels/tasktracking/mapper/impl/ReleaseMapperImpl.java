@@ -1,5 +1,6 @@
 package ru.mels.tasktracking.mapper.impl;
 
+import org.springframework.stereotype.Component;
 import ru.mels.tasktracking.dto.ReleaseRequestDto;
 import ru.mels.tasktracking.dto.ReleaseResponseDto;
 import ru.mels.tasktracking.entity.Release;
@@ -9,6 +10,7 @@ import ru.mels.tasktracking.mapper.ReleaseMapper;
  * @author Meleshkin Alexandr
  * @since 07.03.2022
  */
+@Component
 public class ReleaseMapperImpl implements ReleaseMapper {
     @Override
     public Release fromRequestDto(ReleaseRequestDto source) {

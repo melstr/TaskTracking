@@ -1,5 +1,6 @@
 package ru.mels.tasktracking.mapper.impl;
 
+import org.springframework.stereotype.Component;
 import ru.mels.tasktracking.dto.TaskRequestDto;
 import ru.mels.tasktracking.dto.TaskResponseDto;
 import ru.mels.tasktracking.entity.Task;
@@ -9,6 +10,7 @@ import ru.mels.tasktracking.mapper.TaskMapper;
  * @author Meleshkin Alexandr
  * @since 07.03.2022
  */
+@Component
 public class TaskMapperImpl implements TaskMapper {
     @Override
     public Task fromRequestDto(TaskRequestDto source) {

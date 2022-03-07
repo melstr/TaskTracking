@@ -1,5 +1,6 @@
 package ru.mels.tasktracking.mapper.impl;
 
+import org.springframework.stereotype.Component;
 import ru.mels.tasktracking.dto.ProjectRequestDto;
 import ru.mels.tasktracking.dto.ProjectResponseDto;
 import ru.mels.tasktracking.entity.Project;
@@ -9,6 +10,7 @@ import ru.mels.tasktracking.mapper.ProjectMapper;
  * @author Meleshkin Alexandr
  * @since 07.03.2022
  */
+@Component
 public class ProjectMapperImpl implements ProjectMapper {
     @Override
     public Project fromRequestDto(ProjectRequestDto projectRequestDto) {
@@ -38,7 +40,7 @@ public class ProjectMapperImpl implements ProjectMapper {
             target.setDescription(source.getDescription());
         }
         if(source.getStatus() != null){
-            target.getStatus();
+            target.setStatus(source.getStatus());
         }
         return target;
     }
