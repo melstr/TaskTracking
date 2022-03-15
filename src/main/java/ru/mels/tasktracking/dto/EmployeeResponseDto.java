@@ -1,20 +1,16 @@
 package ru.mels.tasktracking.dto;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 public class EmployeeResponseDto {
-    private Integer id;
+    private Long id;
     private String email;
     private String nickname;
     private String password;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

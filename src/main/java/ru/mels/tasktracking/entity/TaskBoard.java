@@ -10,10 +10,6 @@ import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.CascadeType.REFRESH;
 import static javax.persistence.FetchType.LAZY;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 @Entity
 @Table(name = "task_board")
 public class TaskBoard extends BaseEntity{
@@ -26,7 +22,7 @@ public class TaskBoard extends BaseEntity{
     @OneToMany(mappedBy = "taskBoard",
             orphanRemoval = true,
             cascade = {PERSIST, MERGE, DETACH, REFRESH})
-    private Set<Task> tasks;
+    private Set<Release> releases;
 
     public String getTitle() {
         return title;
@@ -44,11 +40,7 @@ public class TaskBoard extends BaseEntity{
         this.project = project;
     }
 
-    public Set<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
+    public Set<Release> getReleases() {
+        return releases;
     }
 }

@@ -7,10 +7,7 @@ import ru.mels.tasktracking.exception.NotFoundElementException;
 
 import static org.springframework.http.HttpStatus.*;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
+
 @ControllerAdvice
 public class AbstractRestController {
 

@@ -10,18 +10,11 @@ import javax.persistence.Table;
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 @Entity
 @Table(name = "task")
 public class Task extends BaseEntity{
     private String title;
     private String description;
-
-    @ManyToOne(fetch = LAZY)
-    TaskBoard taskBoard;
 
     @ManyToOne(fetch = LAZY)
     Employee reporter;
@@ -65,14 +58,6 @@ public class Task extends BaseEntity{
 
     public void setRelease(Release release) {
         this.release = release;
-    }
-
-    public TaskBoard getTaskBoard() {
-        return taskBoard;
-    }
-
-    public void setTaskBoard(TaskBoard taskBoard) {
-        this.taskBoard = taskBoard;
     }
 
     public Employee getReporter() {

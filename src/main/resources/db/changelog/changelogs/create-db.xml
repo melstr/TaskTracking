@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="create_table_employee" author="Alexander Meleshkin">
+        <createTable tableName="employee">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="email" type="text">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="nickname" type="text">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="create_table_project" author="Alexander Meleshkin">
+        <createTable tableName="project">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="description" type="text"/>
+            <column name="status" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="create_table_task_board" author="Alexander Meleshkin">
+        <createTable tableName="task_board">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="title" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <!--Удалить UC если потребуется связь один ко многим -->
+        <addUniqueConstraint tableName="task_board"
+                             columnNames="project_id"
+                             constraintName="project_uq"/>
+        <addForeignKeyConstraint constraintName="task_board_project_fk"
+                                 baseTableName="task_board" baseColumnNames="project_id"
+                                 referencedTableName="project" referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="create_table_release" author="Alexander Meleshkin">
+        <createTable tableName="release">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="description" type="text"/>
+            <column name="version" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date_time" type="timestamptz">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date_time" type="timestamptz">
+                <constraints nullable="false"/>
+            </column>
+            <column name="task_board_id" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="create_table_task" author="Alexander Meleshkin">
+        <createTable tableName="task">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="title" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reporter_id" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+            <column name="assignee_id" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+            <column name="release_id" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint constraintName="task_employee_reporter_fk"
+                                 baseTableName="task" baseColumnNames="reporter_id"
+                                 referencedTableName="employee" referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="task_employee_assignee_fk"
+                                 baseTableName="task" baseColumnNames="assignee_id"
+                                 referencedTableName="employee" referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="task_release_fk"
+                                 baseTableName="task" baseColumnNames="release_id"
+                                 referencedTableName="release" referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

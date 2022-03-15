@@ -1,15 +1,11 @@
-package ru.mels.tasktracking.mapper.impl;
+package ru.mels.tasktracking.service.mapper.impl;
 
 import org.springframework.stereotype.Component;
 import ru.mels.tasktracking.dto.ReleaseRequestDto;
 import ru.mels.tasktracking.dto.ReleaseResponseDto;
 import ru.mels.tasktracking.entity.Release;
-import ru.mels.tasktracking.mapper.ReleaseMapper;
+import ru.mels.tasktracking.service.mapper.ReleaseMapper;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 @Component
 public class ReleaseMapperImpl implements ReleaseMapper {
     @Override
@@ -30,6 +26,7 @@ public class ReleaseMapperImpl implements ReleaseMapper {
         releaseResponseDto.setVersion(source.getVersion());
         releaseResponseDto.setStartDateTime(source.getStartDateTime());
         releaseResponseDto.setEndDateTime(source.getEndDateTime());
+        releaseResponseDto.setTaskBoardId(source.getTaskBoard().getId());
         return releaseResponseDto;
     }
 

@@ -15,47 +15,60 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.mels.tasktracking.dto.ProjectRequestDto;
 import ru.mels.tasktracking.dto.ProjectResponseDto;
+import ru.mels.tasktracking.enums.ProjectStatus;
+import ru.mels.tasktracking.service.ProjectService;
 
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
-/**
- * @author Meleshkin Alexandr
- * @since 08.03.2022
- */
+
 @RestController
-@RequestMapping(path = "projects")
+@RequestMapping
 @ApiResponse(responseCode = "500", description = "Internal error")
 @ApiResponse(responseCode = "404", description = "Project is not found")
 @ApiResponse(responseCode = "400", description = "Validation failed")
 @Tag(name = "Project controller", description = "Project CRUD controller")
 public class ProjectController {
-    @Operation(summary = "Get project by id")
-    @ApiResponse(responseCode = "200", description = "Project is found")
-    @GetMapping("/{projectId}")
-    public ResponseEntity<ProjectResponseDto> get(@PathVariable("projectId") Integer id){
-        return ResponseEntity.ok(new ProjectResponseDto());
+    private final ProjectService projectService;
+
+    public ProjectController(ProjectService projectService) {
+        this.projectService = projectService;
     }
 
     @Operation(summary = "Get project by id")
+    @ApiResponse(responseCode = "200", description = "Project is found")
+    @GetMapping(Urls.Project.Id.FULL)
+    public ResponseEntity<ProjectResponseDto> get(@PathVariable(Urls.Project.Id.NAME) Long id){
+       return ResponseEntity.ok(projectService.get(id));
+    }
+
+    @Operation(summary = "Create project")
     @ApiResponse(responseCode = "200", description = "Project is created")
-    @PostMapping
+    @PostMapping(Urls.Project.FULL)
     public ResponseEntity<ProjectResponseDto> create(@RequestBody ProjectRequestDto projectRequestDto){
-        return ResponseEntity.ok(new ProjectResponseDto());
+        return ResponseEntity.ok(projectService.create(projectRequestDto));
     }
 
     @Operation(summary = "Update project by id")
     @ApiResponse(responseCode = "200", description = "Project is created")
-    @PatchMapping("/{projectId}")
-    public ResponseEntity<ProjectResponseDto> update(@PathVariable("projectId") Integer id,
+    @PatchMapping(Urls.Project.Id.FULL)
+    public ResponseEntity<ProjectResponseDto> update(@PathVariable(Urls.Project.Id.NAME) Long id,
                                                       @RequestBody ProjectRequestDto projectRequestDto){
-        return ResponseEntity.ok(new ProjectResponseDto());
+        return ResponseEntity.ok(projectService.update(id, projectRequestDto));
     }
 
     @Operation(summary = "Delete project by id")
     @ApiResponse(responseCode = "204", description = "Project is deleted")
-    @DeleteMapping("/{projectId}")
+    @DeleteMapping(Urls.Project.Id.FULL)
     @ResponseStatus(NO_CONTENT)
-    public void delete(@PathVariable("projectId") Integer id){
+    public void delete(@PathVariable(Urls.Project.Id.NAME) Long id){
+        projectService.delete(id);
+    }
 
+    @Operation(summary = "Update status of a project")
+    @ApiResponse(responseCode = "200", description = "Project status is updated")
+    @PatchMapping(Urls.Project.Id.Status.FULL)
+    public ResponseEntity<ProjectResponseDto> updateStatus(@PathVariable(Urls.Project.Id.NAME) Long id,
+                                                           @RequestBody ProjectStatus projectStatus){
+        return ResponseEntity.ok(projectService.updateStatus(id, projectStatus));
     }
 }

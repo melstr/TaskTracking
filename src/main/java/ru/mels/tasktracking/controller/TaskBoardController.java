@@ -11,51 +11,56 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.mels.tasktracking.dto.TaskBoardRequestDto;
 import ru.mels.tasktracking.dto.TaskBoardResponseDto;
+import ru.mels.tasktracking.service.TaskBoardService;
 
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
-/**
- * @author Meleshkin Alexandr
- * @since 08.03.2022
- */
 @RestController
-@RequestMapping(path = "task_boards")
+@RequestMapping
 @ApiResponse(responseCode = "500", description = "Internal error")
 @ApiResponse(responseCode = "404", description = "TaskBoard is not found")
 @ApiResponse(responseCode = "400", description = "Validation failed")
 @Tag(name = "TaskBoard controller", description = "TaskBoard CRUD controller")
 public class TaskBoardController {
-    @Operation(summary = "Get task board by id")
-    @ApiResponse(responseCode = "200", description = "Task board is found")
-    @GetMapping("/{taskBoardId}")
-    public ResponseEntity<TaskBoardResponseDto> get(@PathVariable("taskBoardId") Integer id){
-        return ResponseEntity.ok(new TaskBoardResponseDto());
+    private final TaskBoardService taskBoardService;
+
+    public TaskBoardController(TaskBoardService taskBoardService) {
+        this.taskBoardService = taskBoardService;
     }
 
     @Operation(summary = "Get task board by id")
+    @ApiResponse(responseCode = "200", description = "Task board is found")
+    @GetMapping(Urls.TaskBoard.Id.FULL)
+    public ResponseEntity<TaskBoardResponseDto> get(@PathVariable(Urls.TaskBoard.Id.NAME) Long id){
+        return ResponseEntity.ok(taskBoardService.get(id));
+    }
+
+    @Operation(summary = "Create task board")
     @ApiResponse(responseCode = "200", description = "Task board is created")
-    @PostMapping
-    public ResponseEntity<TaskBoardResponseDto> create(@RequestBody TaskBoardRequestDto taskBoardRequestDto){
-        return ResponseEntity.ok(new TaskBoardResponseDto());
+    @PostMapping(Urls.TaskBoard.FULL)
+    public ResponseEntity<TaskBoardResponseDto> create(@RequestBody TaskBoardRequestDto taskBoardRequestDto,
+                                                       @RequestParam("projectId") Long projectId){
+        return ResponseEntity.ok(taskBoardService.create(projectId, taskBoardRequestDto));
     }
 
     @Operation(summary = "Update task board by id")
     @ApiResponse(responseCode = "200", description = "Task board is created")
-    @PatchMapping("/{taskBoardId}")
-    public ResponseEntity<TaskBoardResponseDto> update(@PathVariable("taskBoardId") Integer id,
-                                                     @RequestBody TaskBoardRequestDto taskBoardRequestDto){
-        return ResponseEntity.ok(new TaskBoardResponseDto());
+    @PatchMapping(Urls.TaskBoard.Id.FULL)
+    public ResponseEntity<TaskBoardResponseDto> update(@PathVariable(Urls.TaskBoard.Id.NAME) Long taskBoardId,
+                                                       @RequestBody TaskBoardRequestDto taskBoardRequestDto){
+        return ResponseEntity.ok(taskBoardService.update(taskBoardId, taskBoardRequestDto));
     }
 
     @Operation(summary = "Delete task board by id")
     @ApiResponse(responseCode = "204", description = "Task board is deleted")
-    @DeleteMapping("/{taskBoardId}")
+    @DeleteMapping(Urls.TaskBoard.Id.FULL)
     @ResponseStatus(NO_CONTENT)
-    public void delete(@PathVariable("taskBoardId") Integer id){
-
+    public void delete(@PathVariable(Urls.TaskBoard.Id.NAME) Long id){
+        taskBoardService.delete(id);
     }
 }

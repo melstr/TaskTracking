@@ -1,14 +1,13 @@
-version: '1.0'
+version: '3'
 
 services:
   db:
     image: postgres:alpine
     restart: always
     environment:
+      POSTGRES_DB: "task_tracking"
       POSTGRES_PASSWORD: password
       POSTGRES_USER: postgres
     ports:
       - "5433:5432"
-    expose:
-      - "5433"
 
