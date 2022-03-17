@@ -32,7 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeResponseDto get(Long id) {
+    public EmployeeResponseDto findById(Long id) {
         return employeeRepository.findById(id)
                 .map(employeeMapper::toResponseDto)
                 .orElseThrow(() ->new EmployeeNotFoundException(id));

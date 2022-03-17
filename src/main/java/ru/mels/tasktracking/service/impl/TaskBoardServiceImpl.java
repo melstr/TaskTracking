@@ -37,7 +37,7 @@ public class TaskBoardServiceImpl implements TaskBoardService {
     }
 
     @Override
-    public TaskBoardResponseDto get(Long id) {
+    public TaskBoardResponseDto findById(Long id) {
         return taskBoardRepository.findById(id)
                 .map(taskBoardMapper::toResponseDto)
                 .orElseThrow(() -> new TaskBoardNotFoundException(id));

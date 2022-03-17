@@ -1,10 +1,21 @@
 package ru.mels.tasktracking.dto;
 
+import ru.mels.tasktracking.enums.EmployeeRole;
+
 public class EmployeeResponseDto {
     private Long id;
     private String email;
     private String nickname;
     private String password;
+    private EmployeeRole role;
+
+    public EmployeeRole getRole() {
+        return role;
+    }
+
+    public void setRole(EmployeeRole role) {
+        this.role = role;
+    }
 
     public Long getId() {
         return id;

@@ -6,18 +6,22 @@ import ru.mels.tasktracking.dto.ProjectRequestDto;
 import ru.mels.tasktracking.dto.ProjectResponseDto;
 import ru.mels.tasktracking.entity.Project;
 import ru.mels.tasktracking.enums.ProjectStatus;
+import ru.mels.tasktracking.exception.CannotCloseTheProjectException;
 import ru.mels.tasktracking.exception.ProjectNotFoundException;
 import ru.mels.tasktracking.repository.ProjectRepository;
 import ru.mels.tasktracking.service.ProjectService;
 import ru.mels.tasktracking.service.mapper.ProjectMapper;
+
+import static ru.mels.tasktracking.enums.ProjectStatus.CLOSED;
 
 @Service
 @Transactional(readOnly = true)
 public class ProjectServiceImpl implements ProjectService {
     private final ProjectMapper projectMapper;
     private final ProjectRepository projectRepository;
-
-    public ProjectServiceImpl(ProjectMapper projectMapper, ProjectRepository projectRepository) {
+    ;
+    public ProjectServiceImpl(ProjectMapper projectMapper,
+                              ProjectRepository projectRepository) {
         this.projectMapper = projectMapper;
         this.projectRepository = projectRepository;
     }
@@ -30,7 +34,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectResponseDto get(Long id) {
+    public ProjectResponseDto findById(Long id) {
         return projectRepository.findById(id)
                 .map(projectMapper::toResponseDto)
                 .orElseThrow(() -> new ProjectNotFoundException(id));
@@ -55,12 +59,15 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.delete(toDelete);
     }
 
-    // TODO: 13.03.2022 Добавить проверку на наличие открытых задач 
     @Override
     @Transactional
     public ProjectResponseDto updateStatus(Long id, ProjectStatus projectStatus) {
         Project project = projectRepository.findById(id)
                 .orElseThrow(() -> new ProjectNotFoundException(id));
+        Long undoneTasks = projectRepository.countUndoneTasks(project);
+        if(undoneTasks != 0 && projectStatus.equals(CLOSED)){
+            throw new CannotCloseTheProjectException(id, undoneTasks);
+        }
         project.setStatus(projectStatus);
         return projectMapper.toResponseDto(projectRepository.save(project));
     }

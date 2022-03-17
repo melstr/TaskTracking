@@ -4,6 +4,10 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
-    <include file="changelogs/create-db.xml" relativeToChangelogFile="true"/>
-    <include file="changelogs/add-employee-role.xml" relativeToChangelogFile="true"/>
+
+    <changeSet id="add-employee-role" author="Alexander Meleshkin">
+        <addColumn tableName="employee">
+            <column name="role" type="text" defaultValue="USER"></column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

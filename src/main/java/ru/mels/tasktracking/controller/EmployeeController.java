@@ -39,8 +39,8 @@ public class EmployeeController {
     @Operation(summary = "Get employee by id")
     @ApiResponse(responseCode = "200", description = "Employee is found")
     @GetMapping(Urls.Employee.Id.FULL)
-    public ResponseEntity<EmployeeResponseDto> get(@PathVariable(Urls.Employee.Id.NAME) Long id){
-        return ResponseEntity.ok(employeeService.get(id));
+    public ResponseEntity<EmployeeResponseDto> findById(@PathVariable Long employeeId){
+        return ResponseEntity.ok(employeeService.findById(employeeId));
     }
 
     @Operation(summary = "Create employee")
@@ -53,17 +53,17 @@ public class EmployeeController {
     @Operation(summary = "Update employee by id")
     @ApiResponse(responseCode = "200", description = "Employee is created")
     @PatchMapping(Urls.Employee.Id.FULL)
-    public ResponseEntity<EmployeeResponseDto> update(@PathVariable(Urls.Employee.Id.NAME) Long id,
+    public ResponseEntity<EmployeeResponseDto> update(@PathVariable Long employeeId,
                                                       @RequestBody EmployeeRequestDto employeeRequestDto){
-        return ResponseEntity.ok(employeeService.update(id, employeeRequestDto));
+        return ResponseEntity.ok(employeeService.update(employeeId, employeeRequestDto));
     }
 
     @Operation(summary = "Delete employee by id")
     @ApiResponse(responseCode = "204", description = "Employee is deleted")
     @DeleteMapping(Urls.Employee.Id.FULL)
     @ResponseStatus(NO_CONTENT)
-    public void delete(@PathVariable(Urls.Employee.Id.NAME) Long id){
-        employeeService.delete(id);
+    public void delete(@PathVariable Long employeeId){
+        employeeService.delete(employeeId);
     }
 
 
