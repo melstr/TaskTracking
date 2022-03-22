@@ -1,33 +1,28 @@
-package ru.mels.tasktracking.mapper.impl;
+package ru.mels.tasktracking.service.mapper.impl;
 
 import org.springframework.stereotype.Component;
 import ru.mels.tasktracking.dto.ProjectRequestDto;
 import ru.mels.tasktracking.dto.ProjectResponseDto;
 import ru.mels.tasktracking.entity.Project;
-import ru.mels.tasktracking.mapper.ProjectMapper;
+import ru.mels.tasktracking.service.mapper.ProjectMapper;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 @Component
 public class ProjectMapperImpl implements ProjectMapper {
     @Override
     public Project fromRequestDto(ProjectRequestDto projectRequestDto) {
         Project project = new Project();
         project.setDescription(projectRequestDto.getDescription());
-        project.setStatus(projectRequestDto.getStatus());
         project.setTitle(projectRequestDto.getTitle());
         return project;
     }
 
     @Override
-    public ProjectResponseDto toResponseDto(Project project) {
+    public ProjectResponseDto toResponseDto(Project source) {
         ProjectResponseDto projectResponseDto = new ProjectResponseDto();
-        projectResponseDto.setId(project.getId());
-        projectResponseDto.setStatus(projectResponseDto.getStatus());
-        projectResponseDto.setTitle(projectResponseDto.getTitle());
-        projectResponseDto.setDescription(projectResponseDto.getDescription());
+        projectResponseDto.setId(source.getId());
+        projectResponseDto.setStatus(source.getStatus());
+        projectResponseDto.setTitle(source.getTitle());
+        projectResponseDto.setDescription(source.getDescription());
         return projectResponseDto;
     }
 

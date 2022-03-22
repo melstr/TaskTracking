@@ -1,5 +1,6 @@
 package ru.mels.tasktracking.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -7,14 +8,12 @@ import java.util.Set;
 
 import static javax.persistence.CascadeType.*;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 @Entity
 @Table(name = "employee")
 public class Employee extends BaseEntity{
+    @Column(unique = true)
     private String email;
+    @Column(unique = true)
     private String nickname;
     private String password;
 

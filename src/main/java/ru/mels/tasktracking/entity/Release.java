@@ -3,6 +3,7 @@ package ru.mels.tasktracking.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
@@ -12,16 +13,18 @@ import static javax.persistence.CascadeType.DETACH;
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.CascadeType.REFRESH;
+import static javax.persistence.FetchType.LAZY;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 @Entity
 @Table(name = "release")
 public class Release extends BaseEntity{
     private String description;
     private String version;
+
+
+
+    @ManyToOne(fetch = LAZY)
+    TaskBoard taskBoard;
 
     @OneToMany(mappedBy = "release",
             orphanRemoval = true,
@@ -33,6 +36,14 @@ public class Release extends BaseEntity{
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime endDateTime;
+
+    public TaskBoard getTaskBoard() {
+        return taskBoard;
+    }
+
+    public void setTaskBoard(TaskBoard taskBoard) {
+        this.taskBoard = taskBoard;
+    }
 
     public String getDescription() {
         return description;

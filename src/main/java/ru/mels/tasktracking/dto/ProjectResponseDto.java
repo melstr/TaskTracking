@@ -2,21 +2,17 @@ package ru.mels.tasktracking.dto;
 
 import ru.mels.tasktracking.enums.ProjectStatus;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 public class ProjectResponseDto {
-    private Integer id;
+    private Long id;
     private String title;
     private String description;
     private ProjectStatus status;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

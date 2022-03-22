@@ -1,15 +1,11 @@
-package ru.mels.tasktracking.mapper.impl;
+package ru.mels.tasktracking.service.mapper.impl;
 
 import org.springframework.stereotype.Component;
 import ru.mels.tasktracking.dto.EmployeeRequestDto;
 import ru.mels.tasktracking.dto.EmployeeResponseDto;
 import ru.mels.tasktracking.entity.Employee;
-import ru.mels.tasktracking.mapper.EmployeeMapper;
+import ru.mels.tasktracking.service.mapper.EmployeeMapper;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 @Component
 public class EmployeeMapperImpl implements EmployeeMapper {
     @Override

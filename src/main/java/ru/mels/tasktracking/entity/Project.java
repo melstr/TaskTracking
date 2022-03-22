@@ -2,6 +2,7 @@ package ru.mels.tasktracking.entity;
 
 import ru.mels.tasktracking.enums.ProjectStatus;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
@@ -9,18 +10,15 @@ import javax.persistence.Table;
 
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
+import static ru.mels.tasktracking.enums.ProjectStatus.OPENED;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 @Entity
 @Table(name = "project")
 public class Project extends BaseEntity{
     private String title;
     private String description;
     @Enumerated(STRING)
-    private ProjectStatus status;
+    private ProjectStatus status = OPENED;
     @OneToOne(fetch = LAZY, mappedBy = "project", optional = false)
     private TaskBoard taskBoard;
 

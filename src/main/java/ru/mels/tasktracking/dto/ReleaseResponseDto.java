@@ -4,24 +4,21 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 public class ReleaseResponseDto {
-    private Integer id;
+    private Long id;
     private String description;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime startDateTime;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime endDateTime;
     private String version;
+    private Long taskBoardId;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -55,5 +52,13 @@ public class ReleaseResponseDto {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public Long getTaskBoardId() {
+        return taskBoardId;
+    }
+
+    public void setTaskBoardId(Long taskBoardId) {
+        this.taskBoardId = taskBoardId;
     }
 }

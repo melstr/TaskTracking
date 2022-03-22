@@ -1,15 +1,11 @@
-package ru.mels.tasktracking.mapper.impl;
+package ru.mels.tasktracking.service.mapper.impl;
 
 import org.springframework.stereotype.Component;
 import ru.mels.tasktracking.dto.TaskRequestDto;
 import ru.mels.tasktracking.dto.TaskResponseDto;
 import ru.mels.tasktracking.entity.Task;
-import ru.mels.tasktracking.mapper.TaskMapper;
+import ru.mels.tasktracking.service.mapper.TaskMapper;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 @Component
 public class TaskMapperImpl implements TaskMapper {
     @Override
@@ -27,10 +23,10 @@ public class TaskMapperImpl implements TaskMapper {
         taskResponseDto.setTitle(source.getTitle());
         taskResponseDto.setDescription(source.getDescription());
         taskResponseDto.setId(source.getId());
-        taskResponseDto.setTaskBoardId(source.getTaskBoard().getId());
         taskResponseDto.setReleaseId(source.getRelease().getId());
         taskResponseDto.setReporterId(source.getReporter().getId());
         taskResponseDto.setAssigneeId(source.getAssignee().getId());
+        taskResponseDto.setStatus(source.getStatus());
         return taskResponseDto;
     }
 

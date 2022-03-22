@@ -3,22 +3,20 @@ package ru.mels.tasktracking.entity;
 import org.hibernate.Hibernate;
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 
+import static javax.persistence.GenerationType.*;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 @MappedSuperclass
 public abstract class BaseEntity {
     @Id
-    @GeneratedValue
-    private Integer id;
+    @GeneratedValue(strategy = IDENTITY)
+    private Long id;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 

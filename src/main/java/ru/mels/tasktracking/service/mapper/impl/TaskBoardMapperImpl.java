@@ -1,15 +1,11 @@
-package ru.mels.tasktracking.mapper.impl;
+package ru.mels.tasktracking.service.mapper.impl;
 
 import org.springframework.stereotype.Component;
 import ru.mels.tasktracking.dto.TaskBoardRequestDto;
 import ru.mels.tasktracking.dto.TaskBoardResponseDto;
 import ru.mels.tasktracking.entity.TaskBoard;
-import ru.mels.tasktracking.mapper.TaskBoardMapper;
+import ru.mels.tasktracking.service.mapper.TaskBoardMapper;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 @Component
 public class TaskBoardMapperImpl implements TaskBoardMapper {
     @Override

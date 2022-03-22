@@ -16,49 +16,54 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.mels.tasktracking.dto.EmployeeRequestDto;
 import ru.mels.tasktracking.dto.EmployeeResponseDto;
+import ru.mels.tasktracking.service.EmployeeService;
 
 
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
-/**
- * @author Meleshkin Alexandr
- * @since 08.03.2022
- */
+
 @RestController
-@RequestMapping(path = "employees")
+@RequestMapping
 @ApiResponse(responseCode = "500", description = "Internal error")
 @ApiResponse(responseCode = "404", description = "Employee is not found")
 @ApiResponse(responseCode = "400", description = "Validation failed")
 @Tag(name = "Employee controller", description = "Employee CRUD controller")
 public class EmployeeController {
-    @Operation(summary = "Get employee by id")
-    @ApiResponse(responseCode = "200", description = "Employee is found")
-    @GetMapping("/{employeeId}")
-    public ResponseEntity<EmployeeResponseDto> get(@PathVariable("employeeId") Integer id){
-        return ResponseEntity.ok(new EmployeeResponseDto());
+    private final EmployeeService employeeService;
+
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
+
     @Operation(summary = "Get employee by id")
+    @ApiResponse(responseCode = "200", description = "Employee is found")
+    @GetMapping(Urls.Employee.Id.FULL)
+    public ResponseEntity<EmployeeResponseDto> get(@PathVariable(Urls.Employee.Id.NAME) Long id){
+        return ResponseEntity.ok(employeeService.get(id));
+    }
+
+    @Operation(summary = "Create employee")
     @ApiResponse(responseCode = "200", description = "Employee is created")
-    @PostMapping
+    @PostMapping(Urls.Employee.FULL)
     public ResponseEntity<EmployeeResponseDto> create(@RequestBody EmployeeRequestDto employeeRequestDto){
-        return ResponseEntity.ok(new EmployeeResponseDto());
+        return ResponseEntity.ok(employeeService.create(employeeRequestDto));
     }
 
     @Operation(summary = "Update employee by id")
     @ApiResponse(responseCode = "200", description = "Employee is created")
-    @PatchMapping("/{employeeId}")
-    public ResponseEntity<EmployeeResponseDto> update(@PathVariable("employeeId") Integer id,
+    @PatchMapping(Urls.Employee.Id.FULL)
+    public ResponseEntity<EmployeeResponseDto> update(@PathVariable(Urls.Employee.Id.NAME) Long id,
                                                       @RequestBody EmployeeRequestDto employeeRequestDto){
-        return ResponseEntity.ok(new EmployeeResponseDto());
+        return ResponseEntity.ok(employeeService.update(id, employeeRequestDto));
     }
 
     @Operation(summary = "Delete employee by id")
     @ApiResponse(responseCode = "204", description = "Employee is deleted")
-    @DeleteMapping("/{employeeId}")
+    @DeleteMapping(Urls.Employee.Id.FULL)
     @ResponseStatus(NO_CONTENT)
-    public void delete(@PathVariable("employeeId") Integer id){
-
+    public void delete(@PathVariable(Urls.Employee.Id.NAME) Long id){
+        employeeService.delete(id);
     }
 
 

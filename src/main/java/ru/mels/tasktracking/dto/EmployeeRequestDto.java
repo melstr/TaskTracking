@@ -1,9 +1,5 @@
 package ru.mels.tasktracking.dto;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 public class EmployeeRequestDto {
     private String email;
     private String nickname;

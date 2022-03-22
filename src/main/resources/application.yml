@@ -6,9 +6,11 @@ spring:
   jpa:
     show-sql: 'true'
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
   jackson:
     time-zone: UTC
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-master.xml
 server:
 #  error:
 #    include-message: always
@@ -16,8 +18,6 @@ server:
 #    include-binding-errors: always
 #    include-stacktrace: never
   port: '8080'
-  servlet:
-    context-path: /api/v1.0
 logging:
   level:
     web: debug

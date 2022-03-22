@@ -2,26 +2,20 @@ package ru.mels.tasktracking.dto;
 
 import ru.mels.tasktracking.enums.TaskStatus;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
-
 public class TaskResponseDto {
-    Integer id;
+    Long id;
     String description;
     TaskStatus status;
     String title;
-    Integer releaseId;
-    Integer taskBoardId;
-    Integer assigneeId;
-    Integer reporterId;
+    Long releaseId;
+    Long assigneeId;
+    Long reporterId;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -49,35 +43,28 @@ public class TaskResponseDto {
         this.title = title;
     }
 
-    public Integer getReleaseId() {
+    public Long getReleaseId() {
         return releaseId;
     }
 
-    public void setReleaseId(Integer releaseId) {
+    public void setReleaseId(Long releaseId) {
         this.releaseId = releaseId;
     }
 
-    public Integer getTaskBoardId() {
-        return taskBoardId;
-    }
 
-    public void setTaskBoardId(Integer taskBoardId) {
-        this.taskBoardId = taskBoardId;
-    }
-
-    public Integer getAssigneeId() {
+    public Long getAssigneeId() {
         return assigneeId;
     }
 
-    public void setAssigneeId(Integer assigneeId) {
+    public void setAssigneeId(Long assigneeId) {
         this.assigneeId = assigneeId;
     }
 
-    public Integer getReporterId() {
+    public Long getReporterId() {
         return reporterId;
     }
 
-    public void setReporterId(Integer reporterId) {
+    public void setReporterId(Long reporterId) {
         this.reporterId = reporterId;
     }
 }

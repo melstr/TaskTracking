@@ -1,13 +1,9 @@
-package ru.mels.tasktracking.mapper;
+package ru.mels.tasktracking.service.mapper;
 
 import ru.mels.tasktracking.dto.TaskRequestDto;
 import ru.mels.tasktracking.dto.TaskResponseDto;
 import ru.mels.tasktracking.entity.Task;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 public interface TaskMapper {
     Task fromRequestDto(TaskRequestDto taskRequestDto);
 

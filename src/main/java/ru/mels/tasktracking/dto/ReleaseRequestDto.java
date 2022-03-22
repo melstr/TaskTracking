@@ -4,10 +4,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
-/**
- * @author Meleshkin Alexandr
- * @since 07.03.2022
- */
 public class ReleaseRequestDto {
     private String description;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
