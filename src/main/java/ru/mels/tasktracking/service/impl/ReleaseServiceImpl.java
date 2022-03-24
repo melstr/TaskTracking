@@ -27,7 +27,7 @@ public class ReleaseServiceImpl implements ReleaseService {
     }
 
     @Override
-    public ReleaseResponseDto get(Long id) {
+    public ReleaseResponseDto findById(Long id) {
         return releaseMapper.toResponseDto(releaseRepository.findById(id)
                 .orElseThrow(() -> new ReleaseNotFoundException(id)));
     }

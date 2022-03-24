@@ -1,12 +1,17 @@
 package ru.mels.tasktracking.entity;
 
+import ru.mels.tasktracking.enums.EmployeeRole;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Set;
 
 import static javax.persistence.CascadeType.*;
+import static javax.persistence.EnumType.STRING;
+import static ru.mels.tasktracking.enums.EmployeeRole.USER;
 
 @Entity
 @Table(name = "employee")
@@ -16,6 +21,16 @@ public class Employee extends BaseEntity{
     @Column(unique = true)
     private String nickname;
     private String password;
+    @Enumerated(STRING)
+    private EmployeeRole role = USER;
+
+    public EmployeeRole getRole() {
+        return role;
+    }
+
+    public void setRole(EmployeeRole role) {
+        this.role = role;
+    }
 
     @OneToMany(mappedBy = "reporter",
             orphanRemoval = true,

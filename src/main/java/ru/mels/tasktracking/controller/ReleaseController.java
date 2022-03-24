@@ -37,8 +37,8 @@ public class ReleaseController {
     @Operation(summary = "Get release by id")
     @ApiResponse(responseCode = "200", description = "Release is found")
     @GetMapping(Urls.Release.Id.FULL)
-    public ResponseEntity<ReleaseResponseDto> get(@PathVariable(Urls.Release.Id.NAME) Long id) {
-        return ResponseEntity.ok(releaseService.get(id));
+    public ResponseEntity<ReleaseResponseDto> findById(@PathVariable Long releaseId) {
+        return ResponseEntity.ok(releaseService.findById(releaseId));
     }
 
     @Operation(summary = "Create release")
@@ -52,16 +52,16 @@ public class ReleaseController {
     @Operation(summary = "Update release by id")
     @ApiResponse(responseCode = "200", description = "Release is created")
     @PatchMapping(Urls.Release.Id.FULL)
-    public ResponseEntity<ReleaseResponseDto> update(@PathVariable(Urls.Release.Id.NAME) Long id,
+    public ResponseEntity<ReleaseResponseDto> update(@PathVariable Long releaseId,
                                                      @RequestBody ReleaseRequestDto releaseRequestDto) {
-        return ResponseEntity.ok(releaseService.update(id, releaseRequestDto));
+        return ResponseEntity.ok(releaseService.update(releaseId, releaseRequestDto));
     }
 
     @Operation(summary = "Delete release by id")
     @ApiResponse(responseCode = "204", description = "Release is deleted")
     @DeleteMapping(Urls.Release.Id.FULL)
     @ResponseStatus(NO_CONTENT)
-    public void delete(@PathVariable(Urls.Release.Id.NAME) Long id) {
-        releaseService.delete(id);
+    public void delete(@PathVariable Long releaseId) {
+        releaseService.delete(releaseId);
     }
 }

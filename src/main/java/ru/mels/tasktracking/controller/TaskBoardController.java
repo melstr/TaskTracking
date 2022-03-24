@@ -36,22 +36,22 @@ public class TaskBoardController {
     @Operation(summary = "Get task board by id")
     @ApiResponse(responseCode = "200", description = "Task board is found")
     @GetMapping(Urls.TaskBoard.Id.FULL)
-    public ResponseEntity<TaskBoardResponseDto> get(@PathVariable(Urls.TaskBoard.Id.NAME) Long id){
-        return ResponseEntity.ok(taskBoardService.get(id));
+    public ResponseEntity<TaskBoardResponseDto> findById(@PathVariable Long taskBoardId){
+        return ResponseEntity.ok(taskBoardService.findById(taskBoardId));
     }
 
     @Operation(summary = "Create task board")
     @ApiResponse(responseCode = "200", description = "Task board is created")
     @PostMapping(Urls.TaskBoard.FULL)
     public ResponseEntity<TaskBoardResponseDto> create(@RequestBody TaskBoardRequestDto taskBoardRequestDto,
-                                                       @RequestParam("projectId") Long projectId){
+                                                       @RequestParam Long projectId){
         return ResponseEntity.ok(taskBoardService.create(projectId, taskBoardRequestDto));
     }
 
     @Operation(summary = "Update task board by id")
     @ApiResponse(responseCode = "200", description = "Task board is created")
     @PatchMapping(Urls.TaskBoard.Id.FULL)
-    public ResponseEntity<TaskBoardResponseDto> update(@PathVariable(Urls.TaskBoard.Id.NAME) Long taskBoardId,
+    public ResponseEntity<TaskBoardResponseDto> update(@PathVariable Long taskBoardId,
                                                        @RequestBody TaskBoardRequestDto taskBoardRequestDto){
         return ResponseEntity.ok(taskBoardService.update(taskBoardId, taskBoardRequestDto));
     }
@@ -60,7 +60,7 @@ public class TaskBoardController {
     @ApiResponse(responseCode = "204", description = "Task board is deleted")
     @DeleteMapping(Urls.TaskBoard.Id.FULL)
     @ResponseStatus(NO_CONTENT)
-    public void delete(@PathVariable(Urls.TaskBoard.Id.NAME) Long id){
-        taskBoardService.delete(id);
+    public void delete(@PathVariable Long taskBoardId){
+        taskBoardService.delete(taskBoardId);
     }
 }
