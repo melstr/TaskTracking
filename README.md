@@ -9,7 +9,7 @@ There are some business logic added (e.g. Project cannot be closed if not all ta
 
 ### Technological stack
 - **IntelliJ IDEA**
-- **Spring boot, Spring Web, Spring JPA, Spring MVC**
+- **Spring boot, Spring Web, Spring Data, Spring MVC**
 - **Docker-compose**
 - **Postgresql, Liquibase, query-dsl**
 - **MapStruct**
