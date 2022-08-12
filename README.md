@@ -1,6 +1,6 @@
 # Task tracking
 ## Description
-A simple task tracking REST API with a basic crud functionality and more.
+A simple task tracking REST API with CRUD functionality and more.
 
 In this pet project I've experimented with JPA relationships, added some business logic,
 implemented task search by filter via QueryDSL.
